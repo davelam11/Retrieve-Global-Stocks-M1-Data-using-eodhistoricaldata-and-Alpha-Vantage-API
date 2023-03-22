@@ -38,16 +38,6 @@ mexico_tickers = get_ticker_list('MX', eodapi)
 arg_tickers = get_ticker_list('BA', eodapi)
 crypto_tickers = get_ticker_list('CC', eodapi)
 
-def get_intraday_data(tickers, api_key):
-    data = {}
-    for ticker in tickers:
-        url = f"https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED&symbol={ticker}&interval=1min&slice=dynamic&apikey={api_key}"
-        response = requests.get(url)
-        if response.status_code == 200:
-            data[ticker] = list(csv.reader(response.text.strip().split('\n')))
-        else:
-            print(f"Failed to retrieve data for {ticker}")
-    return data
 
 def get_intraday_data(tickers, api_key):
     for ticker in tickers:
